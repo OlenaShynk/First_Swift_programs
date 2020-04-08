@@ -1,0 +1,28 @@
+// Задача 1 Вова
+// Створити функцію, яка прийматиме два параметра - “ascending” типу Bool та optional array (int) з мінімум 15 елементами і повертатиме один параметр optional array (int).
+// Робити перевірку масива на nil
+// Робити перевірку на пустоту масива (>0)
+// В залежності від значення ascending (true/false) відсортувати масив від найменшого до найбільшого чи навпаки
+
+// Function and its description
+
+func checkedAndSorted(array inputArray: [Int]?, inAscending order: Bool) -> [Int]? { 
+    if inputArray == nil { print("array is nil") }
+    if inputArray?.isEmpty ?? false { print("array is empty")}
+    return order ? inputArray?.sorted(by: <) : inputArray?.sorted(by: >)
+} 
+
+// Setting start data for testing
+
+var initialArray: [Int] = [3, 8, 5, 0]
+var optionalInitialArray: [Int]? = [1, 2, 6, 47, 8, 9, 0, 3, 9, 5, 4, 0] 
+var optionalNilArray: [Int]? = nil
+optionalInitialArray = (optionalInitialArray == nil) ? nil : (optionalInitialArray ?? []) + (optionalInitialArray ?? [])
+
+// Testing
+print(checkedAndSorted(array: optionalNilArray, inAscending: true))
+print(checkedAndSorted(array: optionalInitialArray, inAscending: true))
+print(checkedAndSorted(array: optionalInitialArray, inAscending: false))
+print(checkedAndSorted(array: initialArray, inAscending: true))
+print(checkedAndSorted(array: initialArray, inAscending: false))
+	
