@@ -1,0 +1,20 @@
+/* Задача 5.Створити функцію, яка прийматиме один параметр age (int) і повертатиме один параметр String. 
+В функції має бути конструкція switch, що скануватиме цей параметр (age) з закритими діапазонами (1...3) 
+і матиме мінімум 2 варіанти (case) і буде виводити текст відповідно до віку
+*/
+func greet(userOfAge age: Int) -> String {
+    var greeting = "Hello, Dear! "
+    let youngAgeRange = 6..<18
+    let matureAgeRange = 18..<79
+
+    switch age {
+    case youngAgeRange:
+        greeting += "Now is the time to learn Swift"
+    case matureAgeRange:
+        greeting += "Now is the time to write programs in Swift"
+    default:
+        greeting += "We are glad to see you!!!"
+    }    
+    return greeting
+}
+print(greet(userOfAge: 18))
