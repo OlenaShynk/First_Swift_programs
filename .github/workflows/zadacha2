@@ -1,0 +1,17 @@
+/*Задача 2.Створити функцію, яка прийматиме один параметр (String) 
+і повертатиме один параметр - цей самий рядок в зворотньому порядку.
+*/
+let stringToConvert = String("Dog:))!")
+var convertedString = String()
+func stringBackConverter(stringToBackConvert: String) ->  String { 
+    var string1 = stringToBackConvert 
+    var string2 = String()
+    for character in string1.reversed() { 
+       string2.append(character)
+    }
+    return (string2)
+}
+convertedString = stringBackConverter(stringToBackConvert: stringToConvert)
+print("Reversed String \(stringToConvert) is ", convertedString)
+
+print("Reversed String \(stringToConvert) is \(stringBackConverter(stringToBackConvert: stringToConvert))")
