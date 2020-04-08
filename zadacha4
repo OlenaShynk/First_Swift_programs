@@ -1,0 +1,29 @@
+/*4a Вова Створити функцію, яка прийматиме масив словників (типу String:String), а також параметр key (типу String). 
+В цій функції знаходити цей ключ із значенням, виводити словник(и) що його містить(ять) і видаляти словник(и) з масиву. 
+Повертати масив без нього (словника/словників).*/
+
+// -- function--
+func printAndDellADictionaryIn(arrayOf dictionaries:[[ String: String]], at key: String) -> [[String: String]] {
+    return dictionaries.compactMap{ 
+        if $0[key] != nil {
+            print(" the key \(key) has value \($0[key] ?? "") \n  in dictionary \($0)")
+            return nil
+        } else {
+            return $0
+        }
+    }
+}
+
+//   --variables--
+var dictionariesForChecking: [[String: String]] = [["YYZ": "Tor", "DUB": "Duk"], ["DUB": "Dab","LHR": "Lon"], ["D": "b","R": "on"]]
+var keysForChecking: [String] = ["DUB", "D", "YYZ", "LHR", "B", "R"]
+
+//  --testing--
+print("dictionaries for testing: \n \(dictionariesForChecking)")
+print()
+keysForChecking.forEach{ key in
+    print("testing the key \(key)")
+    print("the final dictionaries are: \(printAndDellADictionaryIn(arrayOf: dictionariesForChecking, at: key))")
+    print()
+}
+	
