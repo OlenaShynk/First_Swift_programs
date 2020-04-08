@@ -1,0 +1,25 @@
+import Foundation
+//Задача 4 Створити функцію, яка прийматиме масив словників (типу String:String), а також параметр key (типу String). 
+//В цій функції знаходити цей ключ із значенням, виводити його і видаляти його з словника. Повертати масив без нього.
+//   --variables--
+var arrayOfDictionariesToDellAKey: [[String: String]] = [["YYZ": "Tor", "DUB": "Dik"], ["DUB": "Dub","LHR": "Lon"]]
+var keyToDell = "DUB"
+var keyToDell2 = "AoB"
+// -- function--
+func printAndDellAKeyFrom(arrayOfDictionaries:[[ String: String]], key: String) -> [[String: String]] {
+    var outArrayOfDictionaries = arrayOfDictionaries
+    for strNum in 0 ..< outArrayOfDictionaries.count { 
+        var outDictionary  = outArrayOfDictionaries[strNum] 
+        var delletedValue =  outDictionary.removeValue(forKey: key)
+        if delletedValue != nil { 
+            print (" delletedValue is \(delletedValue!)")
+            outArrayOfDictionaries[strNum] = outDictionary
+        }
+    }          
+    return outArrayOfDictionaries
+}
+//  --testing--
+print(arrayOfDictionariesToDellAKey, "with keyToDell2 ", keyToDell2)
+print(printAndDellAKeyFrom(arrayOfDictionaries: arrayOfDictionariesToDellAKey, key: keyToDell2))
+print(arrayOfDictionariesToDellAKey, "with keyToDell ", keyToDell)
+print(printAndDellAKeyFrom(arrayOfDictionaries: arrayOfDictionariesToDellAKey, key: keyToDell))
