@@ -1,0 +1,16 @@
+//Задача 3.Створити функцію, яка прийматиме масив чисел, шукатиме дублікати чисел і повертатиме масив без дублікатів чисел.
+
+func removeDublicates(from array: [Int]) -> [Int] {
+    return Array(Set(array))
+}
+// Settings parameters
+var initialArray3: [Int] = [1, 2, 1, 47, 8, 9, 7, 1, 9, 5, 4, 9, 8, 8, 8, 8] 
+var initialArray5: [Int] = [3, 3, 3, 3, 3, 3, 3]
+var initialArray1: [Int] = [2]
+var initialArray0: [Int] = []
+var arraysForTest: [[Int]] = [initialArray3, initialArray5, initialArray1, initialArray0]
+// Testing
+arraysForTest.forEach{
+    print("initialArray= \($0)")
+    print("removeDublicates=", removeDublicates(from: $0))
+}
