@@ -1,0 +1,46 @@
+/* Задача 1а: Створити функцію, яка прийматиме два параметра - “ascending” типу Bool та optional array (int) з мінімум 15 елементами і повертатиме один параметр optional array (int).
+Робити перевірку масива на nil Робити перевірку на пустоту масива (>0)
+В залежності від значення ascending (true/false) відсортувати масив від найменшого до найбільшого чи навпаки
+!!! Усі результати перевірки не друкувати а повертати як помилки виконання.*/
+// Function and its description
+enum inputArrayError: Error {
+    case itIsNil // (description: String)
+    case itIsEmpty 
+    case itIsTooSmall
+}
+func checkedAndSorted(array inputArray: [Int]?, inAscending order: Bool) throws -> [Int]? { 
+   var outArray: [Int] 
+     if inputArray == nil { 
+         throw inputArrayError.itIsNil /*(description:"array is nil") */}
+    if inputArray?.isEmpty ?? false  {  
+        throw inputArrayError.itIsEmpty  }
+    if inputArray!.count < enoughSizeOfArray { 
+      throw inputArrayError.itIsTooSmall
+    } 
+    return order ? inputArray?.sorted(by: <) : inputArray?.sorted(by: >)
+} 
+// Setting start data for testing
+var enoughSizeOfArray = 15 
+var optionalInitialArray1: [Int]? = nil
+var optionalInitialArray2: [Int]? = []
+var optionalInitialArray3: [Int]? = [1, 98, 6, 47, 8, 9, 0, 3, 9, 5, 4, 0] 
+var optionalInitialArray4: [Int]? = [1, 98, 6, 47, 8, 9, 0, 3, 9, 5, 4, 0, 1, 98, 6, 47, 8, 9, 0, 3, 9, 5, 4, 0] 
+var arraysForTest/*:[[Int]?]*/ = [optionalInitialArray1, optionalInitialArray2, optionalInitialArray3, optionalInitialArray4]
+var arrayToPrint: [Int]? = []
+
+// Catching Errors and Ttesting
+try arraysForTest.forEach{
+    print("optionalInitialArray =", $0," checkedAndSorted out: ")
+    do {
+        arrayToPrint = try checkedAndSorted(array: $0, inAscending: true)
+    } catch inputArrayError.itIsNil {
+        print("Error! Array is NIL!!!")
+    } catch inputArrayError.itIsEmpty {
+        print( "Error! array is empty")
+    } catch inputArrayError.itIsTooSmall { 
+        enoughSizeOfArray = 1
+        arrayToPrint = try checkedAndSorted(array: $0, inAscending: true)
+        print("Error! Array is too small! Sorted Array is: \(arrayToPrint)" )
+    }
+    print("Out Array =", arrayToPrint)
+}
