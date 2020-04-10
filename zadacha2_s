@@ -1,0 +1,13 @@
+//Задача 2. скорочений код
+//Створити функцію, яка прийматиме один параметр (String) і повертатиме один параметр - цей самий рядок в зворотньому порядку.
+func stringBackConverter(of string: String) -> String { 
+    var aString: String = "" //= string
+    for char in string.reversed() {
+        aString.append(char)
+    }
+    return aString
+}  
+//variables and testing
+let inString = String("a Dog:))!")
+print("InString =", inString)
+print("Reversed String =", stringBackConverter(of: inString))
