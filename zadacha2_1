@@ -1,0 +1,32 @@
+/* задача 2.1 Написати функцію, яка прийматиме опціональний масив з оператором inout.
+ Всередині функції треба перевернути масив в зворотньому порядку і видалити перший і останній елемент масиву.
+ І функція має повернути цей масив. Не створювати новий, обов”язково використовувати оператор inout */
+//function
+func reverseMiddle(_ array: inout [Int]?) {
+    switch array {
+        case  nil: break
+       // case  array? = []:   break
+        default: 
+            if array!.count <= 2 {array = []}
+            else {
+            array!.removeFirst()
+            array!.removeLast()
+            array!.reverse()
+            }
+    } 
+}
+// variables for testing
+var inArray1: [Int]? = [0, 3, 4, 5, 6, 7, 8, 9]
+var inArray2: [Int]? = [2, 3, 4]
+var inArray3: [Int]? = [2, 3]
+var inArray4: [Int]? = []
+var inArray5: [Int]? = nil
+var inArrays: [[Int]?] = [inArray1, inArray2, inArray3, inArray4, inArray5]
+var anArray: [Int]?
+//Testing
+inArrays.forEach { 
+    print("InArray= \($0)")
+    anArray = $0
+    reverseMiddle(&anArray)
+    print("OutArray=", anArray)
+}
