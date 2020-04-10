@@ -1,0 +1,50 @@
+/* Задача 1а: Створити функцію, яка прийматиме два параметра - “ascending” типу Bool та optional array (int) з мінімум 15 елементами і повертатиме один параметр optional array (int).
+Робити перевірку масива на nil Робити перевірку на пустоту масива (>0)
+В залежності від значення ascending (true/false) відсортувати масив від найменшого до найбільшого чи навпаки
+!!! Усі результати перевірки не друкувати а повертати як помилки виконання.*/
+// Enums and Structures
+enum InputArrayError: Error {
+    case itIsNil // (description: String)
+    case itIsEmpty 
+    case itIsTooSmall([Int]?)
+}
+// Function and its description
+func checkedAndSorted(array inputArray: [Int]?, inAscending order: Bool) throws -> [Int]? { 
+    guard let inputArray = inputArray else { 
+        throw InputArrayError.itIsNil
+    }
+    guard !(inputArray.isEmpty) else {  
+        throw InputArrayError.itIsEmpty  
+    }
+    let output = order ? inputArray.sorted(by: <) : inputArray.sorted(by: >)
+    guard inputArray.count > enoughSizeOfArray else { 
+      throw InputArrayError.itIsTooSmall(output)
+    } 
+    return output
+} 
+// Setting start data for testing
+var enoughSizeOfArray = 15 
+var optionalInitialArray1: [Int]? = nil
+var optionalInitialArray2: [Int] = []
+var optionalInitialArray3: [Int] = [1, 98, 6, 47, 8, 9, 0, 3, 9, 5, 4, 0] 
+var optionalInitialArray4: [Int] = [1, 98, 6, 47, 8, 9, 0, 3, 9, 5, 4, 0, 1, 98, 6, 47, 8, 9, 0, 3, 9, 5, 4, 0] 
+var arraysForTest:[[Int]?] = [optionalInitialArray1, optionalInitialArray2, optionalInitialArray3, optionalInitialArray4]
+
+// Catching Errors and Testing
+try arraysForTest.forEach{
+    do {
+        print("OptionalInitialArray =", $0," checkedAndSorted out: ")
+        try print("Out Array =", checkedAndSorted(array: $0, inAscending: true))
+    } catch {
+        switch error as? InputArrayError {
+        case .itIsNil: 
+            print("Error! Array is NIL!!!")
+        case .itIsEmpty: 
+            print( "Error! array is empty")
+        case .itIsTooSmall(let out): 
+            print("Error! Array is too small! Sorted Array is: \(out)" )
+        case nil:
+            print("Some unrecognized error happens: \(error)")
+        }
+    }
+}
