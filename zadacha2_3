@@ -3,7 +3,7 @@
  Словник у нас буде “журналом оцінок”. Тобто, ключ - ім”я, значення - оцінка. Вирахувати середню оцінку цього журналу.
 */
 func middleMarkOf(_ dictionary: [String:Int]) -> Double {
-    return Double(dictionary.reduce(0){$0+$1.1/*value*/}) / Double(dictionary.count)   
+    return Double(dictionary.reduce(0){$0+$1.1}) / Double(dictionary.count)   
 }
  
 let inDictionary = ["a":6, "b":1, "c":8, "d":5]
