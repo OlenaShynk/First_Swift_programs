@@ -1,0 +1,41 @@
+//2.6  Написати функцію що прийматиме масив чисел. Відсортувати елементи в масиві таким чином:
+// якщо число парне - ставити на парне місце, якщо ні - на непарне.
+//парним важаємо місце з парним індексом! - отже перший елемент стоїть на парному місці, а 2й на непарному
+func evenAndOddSorted(_ array:  [Int])-> [Int?] { 
+    guard (array.count ) != 0 else { return array } 
+    var evenArray: [Int] = (array.filter { $0 % 2 == 0 }) ?? []
+    var oddArray: [Int] = (array.filter { $0 % 2 != 0 }) ?? []
+    var evenOddMaxCount = oddArray.count > evenArray.count ? oddArray.count : evenArray.count
+    var outArray: [Int?] = []
+    for i in 0 ... evenOddMaxCount-1 {   
+        if i < evenArray.count {
+            outArray.append(evenArray[i])
+        }
+        else { 
+            outArray.append(nil)          
+        }
+        if i < oddArray.count {
+            outArray.append(oddArray[i])
+        }
+        else { 
+            outArray.append(nil)          
+        }
+    }
+    if oddArray.count < evenArray.count { outArray.removeLast() } 
+    return outArray
+   
+}
+// variables for testing
+var inArrays: [[Int]] = [ 
+    [5, 9, 2, 4, 3], 
+    [ 3, 44 ],
+    [ 3,1,4], 
+    [4, 6], 
+    [3], 
+    [] 
+]
+//Testing
+inArrays.forEach { 
+    print("InArray= \($0) ")
+   print("OutArray=", evenAndOddSorted($0))
+}
