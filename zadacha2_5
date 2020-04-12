@@ -1,0 +1,24 @@
+//2.5. Функція, що приймає масив чисел має знайти найбільший і найменший елементи масиву і поміняти їх місцями.
+
+func minAndMaxChange(_ array: inout [Int]) { 
+    guard array.count != 0 else { return}
+    var maxValue = array.max() ?? 0
+    var minValue = array.min() ?? 0
+    guard minValue != maxValue else { return}
+    var maxPosition = 0
+    var minPosition = 0
+    if let i = array.firstIndex(of: maxValue) { 
+        maxPosition = i       
+    }
+     if let j = array.firstIndex(of: minValue) { 
+        minPosition = j        
+    }
+    array[minPosition] = maxValue
+    array[maxPosition] = minValue
+} 
+// variables for testing
+var inArray: [Int] = [ 0, 33, 21, -7, 5, 6, 12, 18, 9, ]
+
+print("inArray =", inArray)
+minAndMaxChange(&inArray) 
+print("outArray=", inArray)
