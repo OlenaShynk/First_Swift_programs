@@ -1,20 +1,11 @@
 /*2. 2. Написати функцію, яка прийматиме строку і повертатиме строку. 
-В функції треба вхідний рядок сканувати на наявність цифр і заміняти їх на якийсь символ, наприклад “*”. 
-*/
-func hideNumbers(inA string: String) -> String {
-    var outString = ""
-    for character in string {
-        switch character {
-        case "1", "2", "3", "4", "5", "6", "7", "8", "9", "0":
-             outString.append("*")
-        default:
-             outString.append(character)
-        }
-    }
+В функції треба вхідний рядок сканувати на наявність цифр і заміняти їх на якийсь символ, наприклад “*”. */
+func hideNumbers(_ string: String) -> String {
+    let outString = String(string.map { $0 >= "0" && $0 <= "9" ? "*" : $0 })
     return outString
 }
 // constant
-let inString = " Would you guess what is hidden there? 12334* 5678* 90*"
+let inString = " String with numbers 12334* 5678* 90*"
 // testing
 print("inString=", inString)
-print("outString=", hideNumbers(inA: inString))
+print("outString=", hideNumbers(inString))
