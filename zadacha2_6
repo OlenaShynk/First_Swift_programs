@@ -1,6 +1,7 @@
 //2.6  Написати функцію що прийматиме масив чисел. Відсортувати елементи в масиві таким чином:
 // якщо число парне - ставити на парне місце, якщо ні - на непарне.
 //парним важаємо місце з парним індексом! - отже перший елемент стоїть на парному місці, а 2й на непарному
+//Ще щось можна покращити?
 func evenAndOddSorted(_ array:  [Int])-> [Int?] { 
     guard (array.count ) != 0 else { return array } 
     var evenArray: [Int] = (array.filter { $0 % 2 == 0 }) ?? []
@@ -8,22 +9,11 @@ func evenAndOddSorted(_ array:  [Int])-> [Int?] {
     var evenOddMaxCount = oddArray.count > evenArray.count ? oddArray.count : evenArray.count
     var outArray: [Int?] = []
     for i in 0 ... evenOddMaxCount-1 {   
-        if i < evenArray.count {
-            outArray.append(evenArray[i])
-        }
-        else { 
-            outArray.append(nil)          
-        }
-        if i < oddArray.count {
-            outArray.append(oddArray[i])
-        }
-        else { 
-            outArray.append(nil)          
-        }
+        i < evenArray.count ? outArray.append(evenArray[i]) : outArray.append(nil)          
+        i < oddArray.count ? outArray.append(oddArray[i]) : outArray.append(nil)     
     }
     if oddArray.count < evenArray.count { outArray.removeLast() } 
-    return outArray
-   
+    return outArray   
 }
 // variables for testing
 var inArrays: [[Int]] = [ 
