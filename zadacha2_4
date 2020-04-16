@@ -1,0 +1,38 @@
+/*2.4. Створити кортедж “студент”. В ньому має бути ім”я, по-батькові, вік. По-батькові - опціонально. Створити функцію, 
+що прийматиме масив кортежів. Через switch зробити перевірку: якщо вік студента більше 25 і є побатькові - виводить рядок 
+з вітанням до нього і зверненням на “Ви”. 
+Якщо по-батькові відсутнє, а вік менший 25 років - вітатись з ним просто. Першу літеру імені писати з маленької літери. */
+func greetingsToYoungAndOld(_ persons: [(name: String, surname: String?, age: Int)]) -> [String] {
+    var outArray: [String] = []
+    var outString = "" 
+    var unOptionalSurname: String = "" 
+    var simpleGreeting = " Вітаємо!" 
+    var honoredGreeting = simpleGreeting 
+    honoredGreeting.insert(contentsOf: " Вас", at: honoredGreeting.index(before: honoredGreeting.endIndex)) 
+    persons.forEach {               
+        switch $0.age { 
+            case 0..<25: 
+                outString = (($0.name.prefix(1).lowercased() + $0.name.dropFirst())) //+ simpleGreeting) чому не пропускає зразу?
+                outString += simpleGreeting            
+            case 25...: 
+                if $0.surname == nil {unOptionalSurname=""}
+                else { unOptionalSurname = " " + $0.surname! }           
+            outString = ($0.name + "" + unOptionalSurname + honoredGreeting)
+            default: 
+            outString = $0.name  + " has wrong age!"
+            }  
+        outArray.append(outString)    
+    } 
+    return outArray 
+}
+ // var and testing
+var arrayOfPersons: [(name: String, surname: String?, age: Int)] = [("Іван", "Петрович" , 25), 
+ ("ІгоР", "" , 23),("Сергій", nil, 43),("СTУДЕНТ", "Іванович" , 20), ("NLO", "513", -5)]
+var i = 0
+
+let resultArray = greetingsToYoungAndOld(arrayOfPersons)
+arrayOfPersons.forEach{
+    print("inTuple\(i) is:", $0)
+    print("Greeting\(i) is:", resultArray[i])
+    i += 1
+}
