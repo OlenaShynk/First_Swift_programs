@@ -1,0 +1,24 @@
+
+
+//3.0 function
+func arrayToDictionary(_ inArray: [Int]) -> [Int:Int] {
+    var outDictionary: [Int:Int] = [:]
+    guard !inArray.isEmpty else {return outDictionary}
+    var array = inArray   
+    var anArray: [Int] = []
+    repeat { 
+        anArray =  array.filter{$0 != array[0]}  
+        outDictionary[array[0]] = array.count - anArray.count       
+        array = anArray     
+    }
+    while  anArray.count>0
+    return outDictionary
+}
+
+var inArrays: [[Int]] = [[1, 0, 5, 3, 3, 3, 5, 7, 7, 5], [2, 3, 7], [4, 4], [8], []]
+var someArray: [Int] = []
+inArrays.forEach {
+    print(".    inArray =", $0)
+    someArray = $0
+    print("outDictionary=",arrayToDictionary(someArray))
+}
