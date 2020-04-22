@@ -1,0 +1,29 @@
+/*3.1. Функція, яка приймає рядок, а повертатиме словник, 
+в якому ключами будуть окремі слова з цього рядка, а значення - кількість їх повторів у реченні*/
+func stringToDictionary(_ string: String) -> [String:Int] {
+func stringToWords(in string: String) -> [String] {
+    let words = string.components(separatedBy: .whitespacesAndNewlines)
+    let nonEmptyWords = words.filter { (x) -> Bool in !x.isEmpty }   
+    return nonEmptyWords
+}
+func arrayToDictionary(_ inArray: [String]) -> [String:Int] {
+    var outDictionary: [String:Int] = [:]    
+    guard !inArray.isEmpty else {return outDictionary}
+    var array = inArray   
+    var anArray: [String] = []
+    repeat { 
+        anArray = array.filter{$0 != array[0]}  
+        outDictionary[array[0]] = array.count - anArray.count       
+        array = anArray     
+    }
+    while  anArray.count>0
+    return outDictionary
+}
+var outArray = arrayToDictionary(stringToWords(in: string))
+return outArray
+}
+//testing
+print("InString = \"tt u u  g g g g t tt tt\" " )
+print("Dictionary=\(stringToDictionary("tt u u  g g g g t tt tt "))")
+print("InString = \"\" " )
+print("Dictionary=\(stringToDictionary(""))")
