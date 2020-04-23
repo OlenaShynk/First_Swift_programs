@@ -1,0 +1,47 @@
+/*3.2. Написати функцію, що буде приймати масив, а також число N і приймає оператор (менше, більше або дорівнює) 
+і повертає відфільтрований масив.
+ Наприклад, якщо передати число 3 і оператор “=” то видаляти всі елементи які зустрічаються рівно 3 рази.
+*/
+enum Sign: CaseIterable {
+    case more, equal, less
+}
+func deliteValues(by aSign: Sign, meetN times: Int, _ inArray: [Int]) -> [Int] {
+    var outArray: [Int] = []
+    guard  !inArray.isEmpty else { return outArray }
+    outArray = inArray   
+    var anArray: [Int] = []
+    var i = 0
+    repeat { 
+        anArray = outArray.filter{$0 != outArray[i]}
+        switch aSign {
+        case .more:  
+            if times < outArray.count - anArray.count {      
+                outArray = anArray
+            }  else { i += 1 }  
+        case .equal:  
+            if times == outArray.count - anArray.count {  
+                outArray = anArray
+            }  else { 
+                i += 1 }  
+        case .less:  
+            if times > outArray.count - anArray.count {   
+                outArray = anArray
+            }  else { 
+                i += 1 
+            } 
+       // default: print("not correct sign!")
+    }   } 
+    while  outArray.count>i 
+    return outArray     
+}
+// Setting Start data and testing 
+var inArrays = [[1, 2, 2, 3, 3, 3, 4, 5, 6, 7],  [8, 8, 11, 9, 8, 11], []]
+var inNumber = 2
+for mySign in Sign.allCases {
+    print("The sign = \(mySign),NumberOfInclusions = \(inNumber) ")
+    inArrays.forEach {
+        print("InArray =",$0)
+        var inArray = $0
+        print("OutArray=", deliteValues(by: mySign, meetN: inNumber, inArray))
+    }
+}
