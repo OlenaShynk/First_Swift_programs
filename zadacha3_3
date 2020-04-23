@@ -1,0 +1,19 @@
+/*3.3. Написати функцію, яка приймає два масива чисел.
+ Треба повернути масив, елементи якого зустрічаються в обох масивах.
+*/
+func returnIntersectionArray<T: Hashable>(_ array1: [T], _ array2: [T] ) -> [T] {
+    guard !array1.isEmpty && !array2.isEmpty else { return [] }
+    var outArray = Array(Set(array1).intersection(Set(array2)))
+    for i in outArray { //print(i)}
+        let addMembersToSet = min(array1.filter{$0 == i}.count, array2.filter{$0 == i}.count)
+        if addMembersToSet>1 { outArray.append(contentsOf: repeatElement(i, count: addMembersToSet - 1)) }
+    }
+  return outArray 
+}
+// Setting Start data and testing 
+var inArrays = [[1, 2, 2, 3, 3, 3, 4, 5, 6, 7], [2, 3, 8, 8, 6, 6, 6], [8, 8, 11, 9, 8, 11], [7, 6, 6, 6, 2], []]
+var inArray2 = [2, 3, 8, 8, 6, 6, 6]
+inArrays.forEach {
+    print("InArray1=",$0,"InArray2=", inArray2 )       
+    print("OutArray=",returnIntersectionArray($0, inArray2))
+}
