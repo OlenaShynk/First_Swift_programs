@@ -12,7 +12,7 @@ func greetingsToYoungAndOld(_ persons: [(name: String, surname: String?, age: In
     persons.forEach {               
         switch $0.age { 
             case 0..<25: 
-                outString = (($0.name.prefix(1).lowercased() + $0.name.dropFirst())) //+ simpleGreeting) чому не пропускає зразу?
+                outString = (($0.name.prefix(1).lowercased() + $0.name.dropFirst()))
                 outString += simpleGreeting            
             case 25...: 
                 if $0.surname == nil {unOptionalSurname=""}
