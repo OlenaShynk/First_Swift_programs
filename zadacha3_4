@@ -1,0 +1,14 @@
+/*4. Створити перерахування для дужок (“[“, “]”, “{“ і т.д.) Написати функцію яка приймає рядок і повертає Bool
+Функція має сканувати рядок на наявність парних дужок. Якщо так - повертати правду, ні - false. */
+func checkPairsOf(_ brackets:[(Character, Character)], inA string: String) -> Bool {  
+    for (open, close) in brackets {  
+        if (string.filter{$0 == open}.count - string.filter{$0 == close}.count) != 0 { return false}
+    }
+    return true
+}
+//Vars and testing
+var inStrings: [String] = ["{}))hblj;[", "[]{}()(){}", "[]1[] []", "[{1}123"]
+var bracketS: [(Character, Character)] = [("[", "]"), ("(", ")"), ("{", "}")]
+inStrings.forEach{
+    print("InString=",$0,"OutValue=", checkPairsOf(bracketS, inA: $0))
+}
