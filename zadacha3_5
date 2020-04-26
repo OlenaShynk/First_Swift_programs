@@ -1,0 +1,43 @@
+/*5. Функція має приймати на вхід масив чисел, і повертати суму двох найменших чисел. Виконувати усі необхідні перевірки
+*/
+// Enums and Structures
+enum InputArrayError: Error {
+    case itIsNil 
+    case itIsEmpty 
+    case itIsTooSmall
+}
+// Function and its description
+func sumOf2MinimumValuesInArray(_ inputArray: [Int]?) throws -> Int { 
+    guard let inputArray = inputArray else { 
+        throw InputArrayError.itIsNil
+    }
+    guard !(inputArray.isEmpty) else {  
+        throw InputArrayError.itIsEmpty  
+    }
+    guard inputArray.count > 1 else { 
+      throw InputArrayError.itIsTooSmall
+    } 
+    var arrayWithout1min = inputArray
+    arrayWithout1min.remove(at: inputArray.firstIndex(of: inputArray.min()!)!) 
+    return inputArray.min()! + arrayWithout1min.min()!   
+}
+// var for testing
+var arraysForTest:[[Int]?] = [ nil, [], [9], [2, -3], [4, -2, -2], [-3, 8, 3, 2]]
+// Catching Errors and Testing
+try arraysForTest.forEach{
+    do {
+        print("OptionalInitialArray =", $0, "Output: ", terminator: "")
+        try print(" SummaOf2 minimalValues = ", sumOf2MinimumValuesInArray($0))
+    } catch {
+        switch error as? InputArrayError {
+        case .itIsNil: 
+            print("Error! Array is NIL!!!")
+        case .itIsEmpty: 
+            print( "Error! array is empty")
+        case .itIsTooSmall://(let out): 
+            print("Error! Array is too small!")
+        case nil:
+            print("Some unrecognized error happens: \(error)")
+        }
+    }
+}
