@@ -9,6 +9,4 @@ func checkPairsOf(_ brackets:[(Character, Character)], inA string: String) -> Bo
 //Vars and testing
 var inStrings: [String] = ["{}))hblj;[", "[]{}()(){}", "[]1[] []", "[{1}123"]
 var bracketS: [(Character, Character)] = [("[", "]"), ("(", ")"), ("{", "}")]
-inStrings.forEach{
-    print("InString=",$0,"OutValue=", checkPairsOf(bracketS, inA: $0))
-}
+inStrings.forEach{ print("InString=",$0,"OutValue=", checkPairsOf(bracketS, inA: $0)) }
