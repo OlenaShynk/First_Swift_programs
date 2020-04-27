@@ -3,7 +3,7 @@
 func returnIntersectionArray<T: Hashable>(_ array1: [T], _ array2: [T] ) -> [T] {
     guard !array1.isEmpty && !array2.isEmpty else { return [] }
     var outArray = Array(Set(array1).intersection(Set(array2)))
-    for i in outArray { //print(i)}
+    for i in outArray { 
         let addMembersToSet = min(array1.filter{$0 == i}.count, array2.filter{$0 == i}.count)
         if addMembersToSet>1 { outArray.append(contentsOf: repeatElement(i, count: addMembersToSet - 1)) }
     }
