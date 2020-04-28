@@ -26,4 +26,5 @@ public func solution(_ n : Int) -> Int {
 //testing
 var testNumbers: [Int] = [0, 1, 2, 3, 8, 36, 123456, -24, 12_345_678_901]
 testNumbers.forEach{
-print("F \($0) =", solution($0))}
+    print("F \($0) =", solution($0))
+}
