@@ -13,5 +13,6 @@ public func solution(_ k : Int, _ a: inout [Int]) -> Int {
 //testing
 var testArrayss: [[Int]] = [[1,2], [1, 1, 2], [1, 1, 1, 2, 2, 3], [3, 4, 51], [], [3]]
 testArrayss.forEach{
-var array = $0
-print("Array= \($0), for k=3  N =", solution(3, &array))}
+    var array = $0
+    print("Array= \($0), for k=3  N =", solution(3, &array))
+}
