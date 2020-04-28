@@ -7,7 +7,7 @@
 
  public func solution(_ inArray: inout [Int]) -> Int {
     var pathArray: [Int] = [0]
-    var currentPosition: Int = 0
+    var currentPosition = 0
     var numberOfSteps = 0
     guard !(inArray.isEmpty) else {return 0}
     repeat {
