@@ -1,0 +1,17 @@
+/*4.4. Непорожній масив А містить N цілих. Пара цілих (Р, В) називаються К-комплементарними в масиві А
+ if 0<= P, B <N та А(Р) + А(В) = К. Написати функцію public func solution(_ K : Int, _ A : inout [Int]) -> Int
+Яка б за даним цілим К та непорожнім масивом А повертала кількість К-комплементарних пар в масиві А.*/
+public func solution(_ k : Int, _ a: inout [Int]) -> Int {
+    guard a.count>1 else {return -1}
+    var outValue = 0
+    for i in 0..<a.count {
+        for j in (i + 1)..<a.count {
+            if a[i] + a[j] == k { outValue += 1}
+    }    }
+    return outValue
+}
+//testing
+var testArrayss: [[Int]] = [[1,2], [1, 1, 2], [1, 1, 1, 2, 2, 3], [3, 4, 51], [], [3]]
+testArrayss.forEach{
+var array = $0
+print("Array= \($0), for k=3  N =", solution(3, &array))}
