@@ -1,0 +1,19 @@
+/*Написати функцію яка на вхід приймає будь-що, і якщо на вході число - виводить його значення 
+(при виводі розрізняє цілі і дробові), 
+якщо на вході слова - пише про це і виводить його значення, в іншому випадку - друкує тип змінної на вході */
+func readAnyType(_ anyTypeValue: Any) {
+    /*switch type(of: anyTypeValue){
+    case is Int: print ("INT")
+    case is Float: print("Float")
+    default: print ("another type")
+    } */
+    if (type(of: anyTypeValue) == type(of: 1)) || (type(of: anyTypeValue) == type(of: 1.1))  { print(anyTypeValue) }
+    else { if type(of: anyTypeValue) == type(of: "string") { print("It is string:", anyTypeValue) }
+        else {   print("type =", type(of: anyTypeValue))}
+    }
+}
+// testing
+readAnyType(1)
+readAnyType(1.2)
+readAnyType("jhk")
+readAnyType([1, 2])
