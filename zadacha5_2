@@ -1,0 +1,17 @@
+/*5.2.Створити функцію, яка на вході приймає рядок цілих чисел (не масив!) типу Int і повертає тюпл 
+(min: Int, max: Int, mediana: Float).
+ Приклад виклику: calculate(1,2,3) має повернути (min: 1, max:3, mediana: 2.0), 
+ якщо викликати calculate(1,1,1,2,2,2,3,3,3) то має повернути те саме */
+func calculate(_ numbers: Int ...) -> (min: Int, max: Int,  mediana: Float) {
+    let numberSum = numbers.reduce(0, { x, y in  x + y })
+    if let minValue = numbers.min() {
+        if let maxValue = numbers.max() {
+            return (min: minValue, max:  maxValue, mediana: Float(numberSum) / Float(numbers.count))           
+    }   }
+    return(min: 0, max: 0, mediana:0.0)
+}
+//testing
+print("For 1, 2, 3, 4, 5 Out is ", calculate(1, 2, 3, 4, 5))
+print("For 1, 1, 2, 2, 3, 3 Out is ", calculate( 1, 1, 2, 2, 3, 3))
+print("For 1 Out is ", calculate(1))
+print("For \"\" Out is ", calculate())
