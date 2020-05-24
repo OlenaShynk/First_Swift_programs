@@ -1,0 +1,74 @@
+/*Створюємо симуляцію соціуму. Створити об’єкти “чоловік” та “жінка”, які мають ім’я, вік, але розрізняються статтю. 
+При зустрічі жінки і чоловіка з ймовірністю 50% може бути створено об’єкт “дитина”, стать якої визначається випадковим чином, 
+а ім’я формується з імен батьків. Усі об’єкти мають мати команду “подорослішати”, яка після 60-ти років починає з імовірністю 20% 
+знищувати дорослих людей, а діти після досягнення 18 років перетворюються на дорослих. 
+Зберігати усіх людей в єдиному масиві, тож зустрічі відбуваються будь-кого з будь-ким. Додати друк усіх подій. */
+// Structure and Functions
+struct Person {
+     var man = 1 //=0 for woman
+     var age = 0
+     var name = ""
+}
+func lifeSimulation(_ initialNumberOfPersons: Int = 8, _ oldestInitialAge: Int = 62, _ numberOfMeetingsPerYearForAPerson: Int = 1, _ numberOfYears: Int = 15) -> [Person] {
+    let maxChildrenAge = 17 
+    var nameBegining = "" 
+    func nextYear(_ persons: inout [Person]) {
+        var i = 0
+        var k = 0
+        var n = 0
+        repeat { 
+            k = 0
+            persons[i].age += 1
+            if (persons[i].age > 60) && (Int.random(in: 1..<5) < 2) {
+                print(persons[i], terminator: "; ")            
+                persons.remove(at: i)
+                k = 1
+                n += 1
+            }
+            if k != 1 { i += 1 }
+        } while i < persons.count
+        if n == 0 { print("none") }
+        else { print() }
+        return
+    } 
+    func meeting(_ persons: inout [Person]) {
+        //let maxChildrenAge = 17
+        var i = Int.random(in: 0..<persons.count)
+        var j  = Int.random(in: 0..<persons.count)
+        print("\(persons[i].name) + \(persons[j].name)", terminator: "; ")
+        if (persons[i].man != persons[j].man) && (persons[i].age >  maxChildrenAge) && (persons[j].age >  maxChildrenAge) &&  (Int.random(in: 0..<2) == 1) {
+            var aPerson = Person(man: Int.random(in: 0..<2),  name: (persons[i].name + persons[j].name))
+            print()
+            print("Child: ", aPerson.man, aPerson.age, aPerson.name) 
+            persons.append(aPerson)  
+        }    
+    }
+    var persons: [Person] = []
+    print("Random initial  array of \(initialNumberOfPersons) persons (gender(1/0), age, name)")
+    for i in 0..<initialNumberOfPersons {
+        var aMan = Int.random(in: 0..<2)
+        if aMan == 1 { nameBegining = "M"}
+        else { nameBegining = "W"}
+        var  aPerson = Person(man: aMan, age: Int.random(in: 1..<oldestInitialAge), name: (nameBegining + String(i)))
+        print("(", aPerson.man, aPerson.age, aPerson.name, terminator: ") ")
+        persons.append(aPerson)
+    }
+    print()
+    for y in 0...numberOfYears - 1 {
+        print("Year \(y): Meatings: ", terminator: "")
+        for _ in 1...numberOfMeetingsPerYearForAPerson * persons.count { meeting(&persons) }
+        print()
+        print("Year \(y+1): Deleted: ", terminator: "")
+        nextYear(&persons)
+    }
+    print("Out  array of \(persons.count) persons (gender(1/0), age, name)")
+    for i in 0..<persons.count { print("(", persons[i].man, persons[i].age, persons[i].name, terminator: ") ")}
+    return persons
+}
+// testing  
+print( "Parameters of lifeSimulation(initialNumberOfPersons, oldestInitialAge, numberOfMeetingsPerYearForAPerson, numberOfYears)")
+print("lifeSimulation( 7, 62, 2, 15) out is:")
+lifeSimulation(7, 62, 2, 15)
+print()
+print("lifeSimulation( 5, 60, 4, 5) out is:")
+lifeSimulation(5, 60, 4, 5)
