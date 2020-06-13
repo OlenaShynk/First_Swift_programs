@@ -1,0 +1,39 @@
+//structures and funtions
+struct House {
+    var houseNumber = 0
+    var owner = 0
+    var residents = Set<Int>()
+}
+struct Person {
+    var houseNumber = 0
+    var dogs = Set<Int>()
+}
+struct Dog {
+    var dogOwner = 0
+}
+struct Residents {
+   var setOfResidents = Set<Int>()
+   var numberOfResidents = 0
+}
+func randomSetOfResidents(_ firstResident: Int, _ maxNumberOfResidents: Int) ->  Set<Int> {
+    var numberOfResidents = Int.random(in: 0 ... maxNumberOfResidents)
+    var setOfResidents = Set<Int>()
+    if numberOfResidents != 0 { 
+        for k in 1 ... numberOfResidents { 
+            setOfResidents.insert(firstResident + k) 
+        } 
+    } 
+    return setOfResidents
+}  
+//initiation of initial values and testing
+let maxNumberOfResidents = 5
+let maxHouseNumber = 5 // first house Number is 0
+var firstFreePersonNumber = maxHouseNumber 
+var houses: [House] = []
+var residentsOfHouses: [Set<Int>] = []
+for j in 0...maxHouseNumber {
+   residentsOfHouses.append( randomSetOfResidents(firstFreePersonNumber,maxNumberOfResidents))
+   firstFreePersonNumber += residentsOfHouses[j].count
+   houses.append(House(houseNumber: j, owner: j, residents: residentsOfHouses[j])) 
+}
+ print(houses)
