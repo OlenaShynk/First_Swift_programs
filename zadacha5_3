@@ -1,15 +1,18 @@
-//structures and funtions
+//structures and funtions (Z 5.3)
 struct House {
     var houseNumber = 0
     var owner = 0
     var residents = Set<Int>()
 }
 struct Person {
-    var houseNumber = 0
-    var dogs = Set<Int>()
+    let personNumber: Int
+    let houseNumber: Int
+    let dog: Int? 
+ //   init(houseNumber: Int? = nill, dog: Int? = nill)  
 }
 struct Dog {
-    var dogOwner = 0
+    let dogNumber: Int
+    var dogOwner: Int?
 }
 struct Residents {
    var setOfResidents = Set<Int>()
@@ -24,16 +27,54 @@ func randomSetOfResidents(_ firstResident: Int, _ maxNumberOfResidents: Int) -> 
         } 
     } 
     return setOfResidents
-}  
+} 
 //initiation of initial values and testing
-let maxNumberOfResidents = 5
-let maxHouseNumber = 5 // first house Number is 0
+let maxNumberOfResidents = 3
+let maxHouseNumber = 3 // first house Number is 0
 var firstFreePersonNumber = maxHouseNumber 
 var houses: [House] = []
+var persons: [Person] = []
+var dogs: [Dog] = []
 var residentsOfHouses: [Set<Int>] = []
+var dogsOfHouses: [Set<Int>?] = []
+var firstFreeDogNumber = 0
+var dogNumber: Int?
 for j in 0...maxHouseNumber {
-   residentsOfHouses.append( randomSetOfResidents(firstFreePersonNumber,maxNumberOfResidents))
-   firstFreePersonNumber += residentsOfHouses[j].count
-   houses.append(House(houseNumber: j, owner: j, residents: residentsOfHouses[j])) 
+    var  setOfResidents = randomSetOfResidents(firstFreePersonNumber,maxNumberOfResidents)
+    houses.append(House(houseNumber: j, owner: j, residents: setOfResidents))
+    setOfResidents.insert(j)
+    residentsOfHouses.append(setOfResidents)
+    firstFreePersonNumber += setOfResidents.count-1
+   // print("J=", j,  firstFreePersonNumber, residentsOfHouses[j])
 }
- print(houses)
+print("R", residentsOfHouses)
+for j in 0...maxHouseNumber {
+    residentsOfHouses[j].forEach { 
+    var aDog = Int.random(in: 0..<2)
+    if aDog == 1 { 
+        dogNumber = firstFreeDogNumber
+        firstFreeDogNumber += 1
+    } else { dogNumber = nil}
+    persons.append(Person(personNumber: $0, houseNumber: j, dog: dogNumber)) 
+} }
+print("PP", persons) 
+for j in 0..<firstFreePersonNumber {
+    if persons[j].dog != nil {
+       dogs.append(Dog(dogNumber: persons[j].dog!, dogOwner: persons[j].personNumber))
+}   }
+print("D", dogs)
+//creating list of dogs
+var aListOfDogs = Set<Int>()
+for j in 0...maxHouseNumber {
+    aListOfDogs = Set<Int>()
+    residentsOfHouses[j].forEach { 
+        if persons[$0].dog != nil {
+            aListOfDogs.insert(persons[$0].dog!)           
+    }   }
+   // persons.append(Person(personNumber: $0, houseNumber: j, dog: dogNumber)) 
+  dogsOfHouses.append(aListOfDogs)
+  print("J=", j, aListOfDogs)
+}
+print("!!", dogsOfHouses)
+         
+
