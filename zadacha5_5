@@ -1,0 +1,70 @@
+/* Створити новий тип “точка”, який містить координати точки. Дозволити його ініціалізацію в декартових та
+ полярних координатах, отримувати його координати в декартових або полярних координатах. 
+ Створити новий тип “комплексне число”. Розширити тип “точка” таким чином, щоб його можна було ініціалізувати 
+ комплексним числом, і відповідно отримувати комплексне число або у вигляді Re()+i Im() або Ro*exp(i Fi).*/
+
+import Foundation
+
+class ComplexNum {
+    var real : Double
+    var imag : Double
+    
+    init (real: Double, imag: Double){
+        self.real = real
+        self.imag = imag
+    }
+    //complex Radius 
+    func radius()->Double {
+        return sqrt(self.real*self.real+self.imag*self.imag)
+    }
+    //complex Angle
+    func angle()->Double {
+        return atan2(self.real, self.imag)
+    }
+}
+
+struct Point {
+    var x: Double
+    var y: Double
+    var r: Double
+    var fi: Double
+
+    init(cX: Double, cY: Double ) {
+        self.x = cX
+        self.y = cY
+        self.r = sqrt ( cX * cX + cY * cY )
+        self.fi = atan2 (cX, cY)
+    }
+    init(sR: Double, sFi: Double ) {
+        self.r = sR
+        self.fi = sFi
+        self.x = sR * cos(sFi)
+        self.y = sR * sin(sFi)
+    }
+    init(complNum: ComplexNum ) {
+        self.x = complNum.real
+        self.y = complNum.imag
+        self.r = complNum.radius()
+        self.fi = complNum.angle()
+    }
+}
+func showXY(xy : ComplexNum)->String {
+    let plusChar = (xy.imag>0) ? "+" : "-"
+    return "\(xy.real) \(plusChar) \(abs(xy.imag))i"
+    }
+func showRFi(rFi : ComplexNum)->String {
+    return "\(rFi.radius()) * exp(\(rFi.angle())i)"
+    }
+// Testing
+let point = Point(cX: 3.0, cY: 3.0)
+print(point)
+let point2 = Point(sR: 4.0, sFi: 0.0)
+print(point2)
+let complX = ComplexNum(real: -2, imag: -2.0)
+let point3 = Point(complNum: complX)
+print(point3)
+print(showXY(xy: complX))
+print(showRFi(rFi : complX))
+let point4 = Point(complNum: ComplexNum(real: 0.0, imag: 1.0))
+print(point4)
+
